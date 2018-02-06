@@ -1,0 +1,7 @@
+¿Cree tener un conversor de codificación UTF8 a ISO-8859.txt?
+No olvide que estos programas... ¡son únicamente pruebas!
+
+Debería, al menos, haber servido para entender mejor cómo funciona la codificación UTF8.
+
+¡Vamos! modifique su programa para que se pueda transformar correctamente este archivo.
+

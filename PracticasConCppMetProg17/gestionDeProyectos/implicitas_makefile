@@ -1,0 +1,25 @@
+.PHONY: clean mrproper all
+
+AR = ar
+# La siguiente es porque CC es el que se usa para enlazar
+CC = g++
+CXX = g++
+CXXFLAGS= -Wall -Wextra -pedantic -std=c++03
+LDFLAGS= -L.
+LDLIBS= -lformas
+
+SOURCESMAIN = central.cpp area.cpp
+SOURCESLIB = punto.cpp circulo.cpp
+OBJECTS = $(SOURCESMAIN:.cpp=.o) $(SOURCESLIB:.cpp=.o)
+EXECUTABLE = $(SOURCESMAIN:.cpp=)
+
+all: libformas.a $(SOURCESMAIN:.cpp=.o) $(EXECUTABLE)
+
+libformas.a: $(SOURCESLIB:.cpp=.o)
+	$(AR) rvs  $@ $^
+
+clean:
+	-rm $(OBJECTS)
+
+mrproper: clean
+	-rm ${EXECUTABLE}

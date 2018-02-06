@@ -1,0 +1,3 @@
+No creo que distinga el tipo de archivo actual.
+Pruebe a ver lo que le indica su programa de test.
+

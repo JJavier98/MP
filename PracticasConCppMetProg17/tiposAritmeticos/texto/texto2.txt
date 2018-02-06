@@ -1,0 +1,4 @@
+Este es un documento de prueba.
+
+El contenido del documento consiste en un grupo de caracteres con cierta codificación. Aun siendo de un tamaño relativamente pequeño, es suficiente como para deducir el tipo de codificación que usa.
+

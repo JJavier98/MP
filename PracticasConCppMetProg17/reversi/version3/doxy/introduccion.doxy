@@ -1,0 +1,96 @@
+/** @mainpage Programación en C++
+ * 
+ * El objetivo de este paquete de herramientas no es el de proporcionar un
+ * conjunto de clases y operaciones para que sean explotados en el desarrollo
+ * de aplicaciones. El código que se desarrolla es sólo una muestra simplificada 
+ * para que sirva de ejemplo para un estudiante de primer curso de la asignatura 
+ * "Metodología de la Programación". 
+ * 
+ * Contiene un proyecto incompleto para que sirva de esqueleto en la solución que
+ * finalmente generará el estudiante. Los únicos fuentes que están terminados son
+ * los archivo ventana.h y ventana.cpp. Además, estos archivos contienen código a
+ * medida para el proyecto, muy simplificado para facilitar la interfaz al estudiante.
+ * 
+ * Recuerde que el diseño de interfaces gráficas no es parte del curso, por lo que este
+ * código está creado para que:
+ *  - sea fácil de entender, 
+ *  - facilite la inserción de una interfaz gráfica en su proyecto práctico
+ *  - muestre cómo se puede enlazar su trabajo con una biblioteca externa (SFML).
+ * 
+ * 
+ * En esta página podrá consultar lo necesario para desarrollar el trabajo:
+ * 
+ * -# \ref requisProyecto
+ * -# \ref compProyecto
+ * -# \ref esqueProyecto
+ * 
+ * 
+ * @section requisProyecto Requisitos del proyecto
+ * 
+ * El proyecto requiere únicamente el uso de la herramienta \e cmake para poder generar los
+ * ejecutables. Para simplificar su uso, se ha incluido la mayor parte del problema ya resuelto.
+ * De esta forma, el estudiante casi se puede limitar a entender cómo funciona \e cmake sin
+ * detalles sobre el lenguaje.
+ * 
+ * Aunque no necesario, resulta conveniente desarrollar el trabajo sobre un entorno de desarrollo.
+ * Considerando que lo gestionamos con \e cmake, una buena opción es el entorno \e QtCreator. Tenga
+ * en cuenta que son programas que se van a desarrollar fuera de la biblitecas QT, por tanto, sólo
+ * será necesario manejar las opciones más simples. Puede consultar el guión de la práctica para más
+ * detalles.
+ * 
+ * Para que el proyecto compile en su máquina, deberá tener instalados los ejecutables de \e cmake y 
+ * las bibliotecas SFML. 
+ * 
+ * @section compProyecto Componentes del proyecto
+ * 
+ * Uno de los objetivos fundamentales de esta parte es la descomposición en subproyectos para que el
+ * estudiante se familiarice con desarrollos más complejos. Para poder hacerlo, se propone que la
+ * solución sea más que un simple ejecutable con un entorno gráfico. En lugar de eso, el proyecto se
+ * divide en tres partes:
+ * 
+ * -# \e "lotelo" que contiene el subproyecto para el desarrollo de una biblioteca para \e reversi.
+ * -# \e "reversi" que contiene el subproyecto que genera el ejecutable de la version 2.
+ * -# \e "otelo" que contiene un subproyecto que genera una versión gráfica basada en SFML.
+ * 
+ * En el entorno de desarrollo, comprobará que puede generar tres ejecutables:
+ * 
+ * -# \e "reversi": Básicamente una reestructuración del código de la versión 2.
+ * -# \e "otelo": El nuevo ejecutable con entorno gráfico.
+ * -# \e "test_tablero": Un ejecutable del módulo \e "otelo" como ejemplo de uso del módulo gráfico.
+ * 
+ * @subsection direcOtelo Directorios en el subproyecto Otelo
+ * 
+ * Si navega por el contenido del subproyecto \e "Otelo" verá que dispone de varios subdirectorios. Realmente
+ * no debe hacerle demasiado caso, aunque tendrá que entender para qué sirven. Si revisa la interfaz de
+ * ejecución, verá que son necesarios dos datos: un fichero de partida y un directorio donde encontrar los
+ * recursos gráficos. Para resolverlo:
+ * 
+ * - El directorio \e "partidas" contiene varios archivos de ejemplo de partidas configuradas. Puede usarlas
+ * como primer parámetro de ejecución. Revise que su formato coincide con las funciones de leer/escribir que
+ * ya tiene resueltas en la biblioteca.
+ * - El directio \e "resources" contiene varios archivos necesarios para el entorno gráfico. Si le interesa
+ * revisar los detalles, puede recorrerlos y repasar dónde se usa en la SFML, aunque no es necesario para usar
+ * la biblioteca gráfica. Sólo deberá proporcionar el directorio a la función \c Ventana::init.
+ * 
+ * Note que realmente su solución sólo implicará añadir el archivo \e "otelo.cpp" conforme indica el guión.
+ * 
+ * @section esqueProyecto Esquema de trabajo del proyecto
+ * 
+ * Para completar esta versión, gran parte del trabajo ya está realizado. En concreto, deberá resolver:
+ * 
+ * -# Reestructurar el código. Las división en componentes implica cambiar lo que ya tiene en la segunda
+ * versión ya resuelta. En concreto, deberá mover todos los módulos a la biblioteca "lotelo" excepto el
+ * archivo con el \c main. En este punto, es recomendable crear un nuevo módulo con las operaciones de E/S
+ * que separó fuera del \c main (en el archivo reversi.cpp) para que formen parte de la biblioteca.
+ * -# Crear un módulo \e reversi.cpp que contenga la solución del subproyecto correspondiente. En este módulo
+ * será necesario incluir el \c main, pero también contendrá la función \c Jugador::dialogoEscoger, que requiere
+ * una interfaz basada en la consola. Por tanto, esta función deberá quedar fuera de la biblioteca. Note que
+ * para desarrollar y probar este proyecto puede dejar comentada la última línea de CMakeLists.txt principal.
+ * -# Crear un módulo \e otelo.cpp que contenga la solución del proyecto correspondiente.  Este módulo tendrá
+ * su propia función \c main así como una nueva versión gráfica de \c Jugador::dialogoEscoger. Consulte el guión
+ * de prácticas para conocer su interfaz.
+ * 
+ * @author Antonio Garrido
+ * @date Febrero-2017
+ * 
+*/

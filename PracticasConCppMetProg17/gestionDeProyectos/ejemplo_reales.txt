@@ -1,0 +1,8 @@
+# Secuencia de números que será leída por el programa ejemplo_sumatoria.cpp
+# Este programa tiene como objetivo servir de ejemplo ilustrativo de cómo leer desde
+#   la entrada estándar o un fichero de texto con el mismo código
+
+# Por ejemplo, hagamos la sumatoria de las potencias de 2 de un octeto
+1   2   4    8  # Esta es la primera mitad
+16 32  64  128  # Esta es la segunda
+#Fin del archivo

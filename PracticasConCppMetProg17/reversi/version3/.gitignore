@@ -1,0 +1,18 @@
+# Las versiones antiguas de editores
+*~
+*.bak
+
+# Ficheros swp de vi
+*.swp
+
+# Directorios de compilación que puedan generase aquí
+BUILD*
+build*
+
+# Ficheros relacionados con el entorno qtcreator
+CMakeLists.txt.user*
+
+# Directorios de datos que no queremos controlar
+docum
+html
+resources

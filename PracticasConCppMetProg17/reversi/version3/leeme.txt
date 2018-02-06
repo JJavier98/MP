@@ -1,0 +1,9 @@
+Ejecute:
+
+doxygen ./doxy/Doxyfile
+
+Para generar una carpeta "docum" donde encontrará la documentación asociada en formato html. Por ejemplo, ejecute:
+
+firefox docum/html/index.html
+
+Para lanzar el navegador "firefox" con los contenidos que se han generado.

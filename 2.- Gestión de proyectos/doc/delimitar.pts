@@ -1,0 +1,12 @@
+# Pasamos el número de puntos
+# que queremos delimitar
+4
+# En formato (x,y) escribimos los puntos
+(0,0)
+#
+ (	1,1)
+#
+#
+ (5,	1 )
+ (5,5)
+

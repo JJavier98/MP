@@ -1,0 +1,556 @@
+#include <cassert>
+#include <iostream>
+#include "class_Tablero.h"
+#include "../Matriz/class_Matriz.h"
+
+using namespace std;
+
+///////////////////////////////////////////////////////
+
+void Tablero::PrettyPrint()
+{
+	char letra = 'a';
+	cout << "  ";
+	for (int i = 0 ; i < tablero.Columnas() ; i++)
+	{
+		cout << letra << " ";
+		letra++;
+	}
+	cout << endl << " -";
+	for (int i = 0 ; i < tablero.Columnas() ; i++)
+	{
+		cout << "--";
+	}
+
+	cout << endl;
+
+	for (int i = 0 ; i < tablero.Filas() ; i++)
+	{
+		int aux=0;
+		for (int j = 0 ; j < tablero.Columnas() ; j++)
+		{
+			if (aux == 0)
+			{
+				cout << i << "|";
+			}
+			if(tablero.Get(i,j) == 0)
+			{
+				cout << " |";
+			}
+			
+			else if (tablero.Get(i,j) == 1)
+			{
+				cout << "x|";
+			}
+			else if (tablero.Get(i,j) == 2)
+			{
+				cout << "o|";
+			}
+			aux++;
+		}
+		cout << endl;
+	}
+	cout << " -";
+	for (int i = 0 ; i < tablero.Columnas() ; i++)
+	{
+		cout << "--";
+	}
+
+	cout << endl;
+}
+
+///////////////////////////////////////////////////////
+
+Tablero::Tablero():tablero()
+{
+	jugador = false;
+	terminada = false;
+	Iniciar();
+}
+
+Tablero::Tablero(int nfc):tablero(nfc)
+{
+	jugador = false;
+	terminada = false;
+	Iniciar();
+}
+
+Tablero::Tablero(int f, int c):tablero(f, c)
+{
+	jugador = false;
+	terminada = false;
+	Iniciar();
+}
+
+Tablero& Tablero::operator=(const Tablero& tab)
+{
+	tablero = tab.tablero;
+	jugador = tab.jugador;
+	terminada = tab.terminada;
+}
+
+//////////////////////////////////////////////////////
+
+int Tablero::Filas()const
+{
+	return tablero.Filas();
+}
+int Tablero::Columnas()const
+{
+	return tablero.Columnas();
+}
+
+int Tablero::Get(int f, int c)const
+{
+	return tablero.Get(f,c);
+}
+
+bool Tablero::Turno()const
+{
+	return jugador;
+}
+
+void Tablero::CambiaTurno(){
+	if(jugador)
+		jugador = false;
+	else
+		jugador = true;
+}
+
+bool Tablero::Final()const
+{
+	return terminada;
+}
+
+void Tablero::Finalizar()
+{
+	terminada = true;
+}
+
+int Tablero::Ganador()const
+{
+	int fil, col;
+	int fichas1, fichas2;
+
+	fichas1 = 0;
+	fichas2 = 0;
+
+	fil = tablero.Filas();
+	col = tablero.Columnas();	
+
+	for (int i = 0 ; i < fil ; i++)
+	{
+		for(int j = 0 ; j < col ; j++)
+		{
+			if (tablero.Get(i,j)==1)
+			{
+				fichas1++;
+			}
+			else if (tablero.Get(i,j)==2)
+				{
+					fichas2++;
+				}
+		}
+	}
+
+	if (fichas1 < fichas2)
+		return 2; // gana jugador2
+	else if (fichas1 > fichas2)
+		return 1; // gana jugador1
+	else
+		return 0; // empate;
+}
+
+int Tablero::Puntuacion()const
+{
+	int fil, col;
+	int fichas1, fichas2;
+
+	fichas1 = 0;
+	fichas2 = 0;
+
+	fil = tablero.Filas();
+	col = tablero.Columnas();	
+
+	for (int i = 0 ; i < fil ; i++)
+	{
+		for(int j = 0 ; j < col ; j++)
+		{
+			if (tablero.Get(i,j)==1)
+			{
+				fichas1++;
+			}
+			else if (tablero.Get(i,j)==2)
+				{
+					fichas2++;
+				}
+		}
+	}
+
+	if (Ganador()==1)
+		return (fichas1 - fichas2);
+	else if (Ganador()==2)
+		return (fichas2 - fichas1);
+	else
+		return 0;
+}
+
+bool Tablero::PosicionValida(int f, int c, bool player)const
+{
+	assert(f < Filas() && f >= 0);
+	assert(c < Columnas() && c >= 0);
+	assert(Get(f,c)==0);
+
+	//_____________________________________________
+
+	int ini_f = f-1,
+		ini_c = c-1,
+		fin_f = f+1,
+		fin_c = c+1;
+
+	//_____________________________________________
+
+	if(ini_c < 0)
+	{
+		ini_c = 0;
+	}
+
+	if (ini_f < 0)
+	{
+		ini_f = 0;
+	}
+
+	if (fin_c >= Columnas())
+	{
+		fin_c = Columnas()-1;
+	}
+
+	if(fin_f >= Filas())
+	{
+		fin_f = Filas()-1;
+	}
+
+
+	for (int i = ini_f ; i <= fin_f ; i++)
+	{
+		for (int j = ini_c ; j <= fin_c ; j++)
+		{
+
+		}
+	}
+}
+
+/*
+bool Tablero::PosicionValida(int f, int c, bool player)const
+{
+	assert(f < Filas() && f >= 0);
+	assert(c < Columnas() && c >= 0);
+	assert(Get(f,c)==0);
+
+
+	int color[8]; // 1 = negra ; 2 = blanca
+
+	int ini_f = f-1,
+		ini_c = c-1,
+		fin_f = f+1,
+		fin_c = c+1;
+
+///////////////////////////////////////////////////////////////////
+
+	if(ini_c < 0)
+	{
+		ini_c = 0;
+	}
+
+	if (ini_f < 0)
+	{
+		ini_f = 0;
+	}
+
+	if (fin_c >= Columnas())
+	{
+		fin_c = Columnas()-1;
+	}
+
+	if(fin_f >= Filas())
+	{
+		fin_f = Filas()-1;
+	}
+
+////////////////////////////////////////////////////////////////////
+
+	int cont = 0;
+
+	for (int i = ini_f ; i <= fin_f ; i++)
+	{
+		for (int j = ini_c ; j <= fin_c ; j++)
+		{
+			if (f!=i && c!=j)
+			{
+				if (Get(i,j) == 1) // Ficha jugador1 (negra)
+				{
+					color[cont] = 1;
+				}
+				else if (Get(i,j) == 2) // Ficha jugador2 (blanca)
+				{
+					color[cont] = 2;
+				}
+				else // No hay ficha
+				{
+					color[cont] = 0;
+				}
+				cont++;
+			}
+		}
+	}
+
+	bool continua_buscando = true;
+
+	// Jugador1 (Fichas negras (nº 1))
+	if (!player && continua_buscando)
+	{
+		// Busca alrededor de la posición el tipo de fichas que hay
+		for (int k = 0 ; k < 8 ; k++) 
+		{
+			// Interesa que al lado de la ficha negra del jugador 1 haya una ficha blanca(nº 2) del jugador 2
+			if (color[k]==2) 
+			{
+				//Dependiendo de la casilla en que esté la ficha blanca debemos buscar en una dirección u otra
+				if(k==0)
+				{
+					for(int i = f-2, j = c-2 ; i >= 0 && j >= 0 ; i--, j--)
+					{
+						if(Get(i,j)==1)
+						{
+							continua_buscando = false;
+						}
+					}
+				}
+				else if(k==1)
+				{
+					for(int i = f-2 ; i >= 0 ; i--)
+					{
+						if(Get(i,c)==1)
+						{
+							continua_buscando=false;
+						}
+					}
+				}
+				else if(k==2)
+				{
+					for(int i = f-2, j = c+2 ; i >= 0 && j < Columnas() ; i--, j++)
+					{
+						if(Get(i,j)==1)
+						{
+							continua_buscando = false;
+						}
+					}	
+				}
+				else if(k==3)
+				{
+					for(int j = c+2 ; j < Columnas() ; j++)
+					{
+						if(Get(f,j)==1)
+						{
+							continua_buscando = false;
+						}
+					}
+				}
+				else if(k==4)
+				{
+					for(int i = f+2, j = c+2 ; i < Filas() && j < Columnas() ; i++, j++)
+					{
+						if(Get(i,j)==1)
+						{
+							continua_buscando = false;
+						}
+					}
+				}
+				else if(k==5)
+				{
+					for(int i = f+2 ; i < Filas() ; i++)
+					{
+						if (Get(i,c)==1)
+						{
+							continua_buscando = false;
+						}
+					}
+				}
+				else if(k==6)
+				{
+					for(int i = f+2, j = c-2 ; i < Filas() && j >= 0 ; i++, j--)
+					{
+						if(Get(i,j)==1)
+						{
+							continua_buscando = false;
+						}
+					}
+				}
+				else if(k==7)
+				{
+					for(int j = c-2 ; j >= 0 ; j--)
+					{
+						if (Get(f,j)==1)
+						{
+							continua_buscando = false;
+						}
+					}
+				}
+			}
+		}
+	}
+	//jugador 2 (Fichas blancas (nº 2))
+	else if (player &&  continua_buscando)
+	{
+		// Busca alrededor de la posición el tipo de fichas que hay
+		for (int k = 0 ; k < 8 ; k++)
+		{
+			// Interesa que al lado de la ficha blanca del jugador 2 haya una ficha negra(nº 1) del jugador 1
+			if (color[k]==1)
+			{
+				//Dependiendo de la casilla en que esté la ficha negra debemos buscar en una dirección u otra
+				if(k==0)
+				{
+					for(int i = f-2, j = c-2 ; i >= 0 && j >= 0 ; i--, j--)
+					{
+						if(Get(i,j)==2)
+						{
+							continua_buscando = false;
+						}
+					}
+				}
+				else if(k==1)
+				{
+					for(int i = f-2 ; i >= 0 ; i--)
+					{
+						if(Get(i,c)==2)
+						{
+							continua_buscando=false;
+						}
+					}
+				}
+				else if(k==2)
+				{
+					for(int i = f-2, j = c+2 ; i >= 0 && j < Columnas() ; i--, j++)
+					{
+						if(Get(i,j)==2)
+						{
+							continua_buscando = false;
+						}
+					}	
+				}
+				else if(k==3)
+				{
+					for(int j = c+2 ; j < Columnas() ; j++)
+					{
+						if(Get(f,j)==2)
+						{
+							continua_buscando = false;
+						}
+					}
+				}
+				else if(k==4)
+				{
+					for(int i = f+2, j = c+2 ; i < Filas() && j < Columnas() ; i++, j++)
+					{
+						if(Get(i,j)==2)
+						{
+							continua_buscando = false;
+						}
+					}
+				}
+				else if(k==5)
+				{
+					for(int i = f+2 ; i < Filas() ; i++)
+					{
+						if (Get(i,c)==2)
+						{
+							continua_buscando = false;
+						}
+					}
+				}
+				else if(k==6)
+				{
+					for(int i = f+2, j = c-2 ; i < Filas() && j >= 0 ; i++, j--)
+					{
+						if(Get(i,j)==2)
+						{
+							continua_buscando = false;
+						}
+					}
+				}
+				else if(k==7)
+				{
+					for(int j = c-2 ; j >= 0 ; j--)
+					{
+						if (Get(f,j)==2)
+						{
+							continua_buscando = false;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	if(continua_buscando)
+	{
+		return false; //No es una casilla válida.
+	}
+	else
+	{
+		
+		return true; // Sí es válida.
+	}
+}
+*/
+
+bool Tablero::PasaPalabra(bool player)const
+{
+	for (int i = 0 ; i < Filas() ; i++)
+	{
+		for(int j = 0 ; j < Columnas() ; j++)
+		{
+			if(PosicionValida(i,j,player))
+			{
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+void Tablero::Set(int f, int c, bool player)
+{
+	assert(f < Filas() && f >= 0);
+	assert(c < Columnas() && c >= 0);
+
+	// tablero es un dato miembro de tipo Matriz
+	if(!player) // Jugador 1
+	{
+		tablero.Set(f,c,1);
+	}
+	else
+	{
+		tablero.Set(f,c,2);
+	}
+}
+
+void Tablero::Iniciar()
+{
+	for(int i = 0 ; i < Filas() ; i++)
+	{
+		for (int j = 0 ; j < Columnas() ; j++)
+		{
+			tablero.Set(i,j,0);
+		}
+	}
+
+	//if(Filas() % 2 == 0 && Columnas()%2 == 0)
+	//{
+	Set(Filas()/2,Columnas()/2,true);
+	Set(Filas()/2,Columnas()/2-1,false);
+	Set(Filas()/2-1,Columnas()/2,false);
+	Set(Filas()/2-1,Columnas()/2-1,true);
+	//}
+}

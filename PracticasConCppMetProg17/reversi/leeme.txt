@@ -1,0 +1,12 @@
+En este directorio se incluyen algunos ficheros que pueden ser útiles para crear las soluciones del guión práctico dedicado al juego "REVERSI":
+
+A.- Directorio "version1". Un fichero:
+   1.- "input1.txt". Ejemplo de entrada que provoca alguna situación de "pasar" y un fin de partida antes de acabar el tablero.
+B.- Directorio "version2". Tres ficheros:
+   1.- "10x10con3fichas.otelo" que contiene la configuración de un tablero; útil para la última parte al cambiar estrategia por turnos.
+   2.- "CMakeLists.txt" para poder trabajar con cmake o con herramientas que lo usen.
+   3.- "5x5con1ficha.otelo" que contiene la configuración de un tablero; útil para ver cómo funciona el paso de turno y la finalización.
+C.- Directorio "version3". Contiene un esqueleto de un proyecto basado en las versiones anteriores en el que se ha creado una nueva versión gráfica. Tiene tres subdirectorios:
+   1.- "lotelo" que contiene el subproyecto para el desarrollo de una biblioteca para reversi.
+   2.- "reversi" que contiene el subproyecto que genera el ejecutable de la version 2.
+   3.- "otelo" que contiene un subproyecto que genera una versión gráfica basada en SFML.
